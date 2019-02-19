@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Text, View, TouchableOpacity, TextInput,ScrollView,ActivityIndicator} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {styles} from "./styles/styles";
+
 import firebase from "./config/firebase";
 
 
@@ -10,6 +11,10 @@ const { containerAuthorization,inputStyles, welcome} = styles;
 
 type Props = {};
 export default class Registration extends Component<Props> {
+
+
+
+
 
     constructor() {
         super();
@@ -81,6 +86,25 @@ export default class Registration extends Component<Props> {
     }
 
 
+    fbRegistration(){
+       // this
+        LoginManager.logInWithReadPermissions(['public_profile']).then(
+            function(result) {
+                if (result.isCancelled) {
+                    alert('Login cancelled');
+                } else {
+                    alert('Login success with permissions: '
+                        +result.grantedPermissions.toString());
+                }
+            },
+            function(error) {
+                alert('Login fail with error: ' + error);
+            }
+        );
+
+    }
+
+
 
 
 
@@ -123,31 +147,7 @@ export default class Registration extends Component<Props> {
 
 
 
-                {/*<TextInput*/}
-                    {/*style={inputStyles}*/}
-                    {/*placeholder="Name"*/}
-                    {/*placeholderTextColor="white"*/}
-                {/*/>*/}
-                {/*<TextInput*/}
-                    {/*style={inputStyles}*/}
-                    {/*placeholder="Last Name"*/}
-                    {/*placeholderTextColor="white"*/}
-                {/*/>*/}
-                {/*<TextInput*/}
-                    {/*style={inputStyles}*/}
-                    {/*placeholder="Mobile number or email"*/}
-                    {/*placeholderTextColor="white"*/}
-                {/*/>*/}
-                {/*<TextInput*/}
-                    {/*style={inputStyles}*/}
-                    {/*placeholder="Password"*/}
-                    {/*placeholderTextColor="white"*/}
-                    {/*secureTextEntry={true} />*/}
-                {/*<TextInput*/}
-                    {/*style={inputStyles}*/}
-                    {/*placeholder="Repeat the password"*/}
-                    {/*placeholderTextColor="white"*/}
-                    {/*secureTextEntry={true} />*/}
+
 
                 {this.state.preloader
                     ? <ActivityIndicator size="large" color="#ffffff"/>
@@ -159,6 +159,7 @@ export default class Registration extends Component<Props> {
                 <TouchableOpacity onPress={() => Actions.Authorization()} >
                     <Text  style={styles.buttonRegistration}> back</Text>
                 </TouchableOpacity>
+
             </View>
 
         );

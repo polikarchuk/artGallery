@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import { Text, View, Image, TextInput,TouchableOpacity} from 'react-native';
 import {styles} from "./styles/styles";
 import {Actions} from "react-native-router-flux";
-import listGallery from "./listGallery";
+
 import firebase from "./config/firebase";
+import CreateGallery from "./CreateGallery";
+
 
 
 
@@ -31,14 +33,13 @@ export default class profile extends Component<Props> {
             }
         }
     }
-7
+
     componentWillMount () {
         const userId = this.props.id;
-
         firebase.database().ref('users/' + userId)
             .on('value',  (snapshot)=> {
                 this.setState({user: snapshot.val()});
-                alert(JSON.stringify(snapshot.val())) ;
+
             });
 
     }

@@ -25,7 +25,7 @@ type Props = {};
 
 
     loginPress() {
-        login(this.state.email, this.state.password)
+        this.props.login(this.state.email, this.state.password)
             .then((resp) => {
                 // axios.defaults.headers.common['Authorization'] = `Bearer ${resp.apiToken}`;
                 Actions.reset('profile',{id:resp.uid});
@@ -36,10 +36,6 @@ type Props = {};
             })
 
     }
-
-
-
-
     render() {
         return (
             <View style={containerAuthorization}>

@@ -6,9 +6,18 @@ const INITIAL_STATE = {
 };
 
 
-const galleryReducer = (state = INITIAL_STATE,action)=>{
-    return state
-};
+const userReducer = (state = INITIAL_STATE, action)=> {
+
+    if(action.type === 'update_user'){
+        const newState = {...state, ...action.payload};
+        return newState;
+    }
 
 
-export  default  galleryReducer;
+    return state;
+}
+
+
+export  default  userReducer;
+
+

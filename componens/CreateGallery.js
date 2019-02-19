@@ -12,17 +12,13 @@ import {addGallery} from './action/galleryAction';
 
 
 
-const { containerAuthorization, inputStyles,buttonSend, textAreaContainer,textArea} = styles;
+const { containerAuthorization, inputStyles,wrapperImg,buttonSend, textAreaContainer,textArea} = styles;
 
 type Props = {};
  class CreateGallery extends Component<Props> {
     constructor() {
         super();
         this.state = {
-            //  preloader: false,
-            name: '',
-            address: '',
-
             pictures: []
 
         }
@@ -30,11 +26,7 @@ type Props = {};
 
 
 
-    componentDidMount() {
-        if (this.props.user.uid !== null) {
-            Actions.reset('list');
-        }
-    }
+
 
     saveGallery() {
         this.props.addGallery(this.state);
@@ -51,8 +43,6 @@ type Props = {};
         });
     }
 
-
-
         render() {
         return (
             <ScrollView>
@@ -62,7 +52,7 @@ type Props = {};
                         <TouchableOpacity   onPress={this.chooseAvatar.bind(this)}>
                             <Text  style={buttonSend}> Choose avatar </Text>
                         </TouchableOpacity>
-                        <View style={{flexDirection: 'row'}}>
+                        <View style={wrapperImg}>
                             {this.state.pictures.map((img, index) =>
                                 <Image
                                     key={index}
@@ -74,8 +64,8 @@ type Props = {};
 
                     </View>
                     <TextInput
-                        value={this.state.nameGallery}
-                        onChangeText={(nameGallery) => {this.setState({nameGallery})}}
+                        value={this.state.name}
+                        onChangeText={(name) => {this.setState({name})}}
                         style={inputStyles}
                         placeholder={'Name gallery '}
                         placeholderTextColor={'#ccc'}
@@ -113,7 +103,7 @@ type Props = {};
                     <Text style={styles.welcome}>Open</Text>
                     <DatePicker
                         style={styles.datePicker}
-                        date={this.state.date}
+                        date={this.state.time}
                         mode="time"
                         placeholder="select date"
 
@@ -131,11 +121,11 @@ type Props = {};
                             }
                             // ... You can check the source to find the other keys.
                         }}
-                        onDateChange={(date) => {this.setState({date: date})}}
+                        onDateChange={(time) => {this.setState({time: time})}}
                     />
                     <DatePicker
                         style={styles.datePicker}
-                        date={this.state.date}
+                        date={this.state.time_2}
                         mode="time"
                         placeholder="select date"
                         customStyles={{
@@ -151,7 +141,7 @@ type Props = {};
                             }
                             // ... You can check the source to find the other keys.
                         }}
-                        onDateChange={(date) => {this.setState({date: date})}}
+                        onDateChange={(time_2) => {this.setState({time_2: time_2})}}
                     />
 
 
@@ -175,4 +165,4 @@ const mapStoreToProps = (store) => {
     return {user: store.user};
 };
 
-export default connect(mapStoreToProps, {addGallery});
+export default connect(mapStoreToProps, {addGallery})(CreateGallery)

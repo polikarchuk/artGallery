@@ -6,7 +6,7 @@ import firebase from '../config/firebase';
 export const addGallery = (gallery) => dispatch => {
     const pictures = gallery.pictures.map(img => img.data);
     // delete cafe.pictures;
-    firebase.database().ref('cafes/' + uuid()).set(gallery,
+    firebase.database().ref('gallery/' + uuid()).set(gallery,
         (error) => {
             if (error) {
                 // The write failed...
